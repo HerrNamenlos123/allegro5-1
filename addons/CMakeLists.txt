@@ -75,7 +75,8 @@ addons_summary("- Acodec addon" SUPPORT_ACODEC)
 set(ADDONS_CONFIGURATION_SUMMARY "${ADDONS_CONFIGURATION_SUMMARY}${ACODEC_CONFIGURATION_SUMMARY}")
 
 if(SUPPORT_FONT AND WANT_TTF)
-    find_package(Freetype)
+    #find_package(Freetype)
+    set(FREETYPE_FOUND 1)
 
     option(FREETYPE_ZLIB "Enable if FreeType static library needs zlib linked in." off)
     option(FREETYPE_BZIP2 "Enable if FreeType static library needs bzip2 linked in." off)
