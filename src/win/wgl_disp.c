@@ -980,7 +980,7 @@ static bool create_display_internals(ALLEGRO_DISPLAY_WGL *wgl_disp)
    /* Fill in the display settings for opengl major and minor versions...*/
    const int v = disp->ogl_extras->ogl_info.version;
    disp->extra_settings.settings[ALLEGRO_OPENGL_MAJOR_VERSION] = (v >> 24) & 0xFF;
-   disp->extra_settings.settings[ALLEGRO_OPENGL_MINOR_VERSION] = (v >> 16) & 0xFF;   
+   disp->extra_settings.settings[ALLEGRO_OPENGL_MINOR_VERSION] = (v >> 16) & 0xFF;
 
    /* Try to enable or disable vsync as requested */
    /* NOTE: my drivers claim I don't have WGL_EXT_swap_control
@@ -1167,7 +1167,6 @@ static void wgl_unset_current_display(ALLEGRO_DISPLAY *d)
       ALLEGRO_ERROR("Unable unset the current context! %s\n", _al_win_last_error());
    }
 }
-
 
 /*
  * The window must be created in the same thread that

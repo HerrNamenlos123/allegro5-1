@@ -19,7 +19,7 @@ set(ALLEGRO_PROJECT_NAME "ALLEGRO" CACHE STRING "Project default name")
 
 project(${ALLEGRO_PROJECT_NAME}${ALLEGRO_PROJECT_SUFFIX} C CXX)
 
-cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 if(COMMAND cmake_policy)
     cmake_policy(SET CMP0003 NEW)
     if(POLICY CMP0026)
@@ -414,10 +414,6 @@ if(COMPILER_GCC_OR_CLANG)
         # the mangled_main won't have a forward declaration.
         set(WFLAGS_C_ONLY "${WFLAGS_C_ONLY} -Wmissing-prototypes")
     endif(ALLEGRO_UNIX)
-    if(WIN32)
-        # Helps to ensure the Windows port remains compatible with MSVC.
-        set(WFLAGS_C_ONLY "${WFLAGS_C_ONLY} -Wdeclaration-after-statement")
-    endif(WIN32)
     if(STRICT_WARN)
         set(WFLAGS "${WFLAGS} -Werror")
     endif()
