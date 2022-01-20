@@ -117,7 +117,7 @@ endif(WANT_IMAGE_FREEIMAGE)
 image_summary(" - FreeImage" ALLEGRO_CFG_IIO_SUPPORT_FREEIMAGE)
 
 if(WANT_IMAGE_PNG AND NOT ALLEGRO_CFG_IIO_SUPPORT_PNG)
-    find_package(PNG)
+    set(PNG_FOUND 1)
     if(PNG_FOUND)
         # HAVE_PNG means libpng is available (and should be used)
         set(ALLEGRO_CFG_IIO_HAVE_PNG 1)

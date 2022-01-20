@@ -1235,21 +1235,20 @@ static void display_thread_proc(void *arg)
              rect.right - rect.left, rect.bottom - rect.top,
              SWP_NOZORDER | SWP_FRAMECHANGED);
    }
-
-   if (disp->flags & ALLEGRO_FULLSCREEN_WINDOW) {
-      _al_win_set_window_frameless(disp, win_disp->window, true);
-   }
-
+   
    {
       DWORD lock_time;
       HWND wnd = win_disp->window;
 
-      if ((disp->flags & ALLEGRO_FULLSCREEN) == 0) {
+      if ((disp->flags & ALLEGRO_FULLSCREEN) == 0) { // Not fullscreen mode
          ShowWindow(wnd, SW_SHOWNORMAL);
          SetForegroundWindow(wnd);
          UpdateWindow(wnd);
       }
-      else {
+      else {         // Fullscreen mode
+         
+         bool frameless = true;
+         _al_win_set_window_frameless(disp, win_disp->window, frameless);
 
          /* Yep, the following is really needed sometimes. */
          /* ... Or is it now that we have dumped DInput? */
@@ -1263,14 +1262,14 @@ static void display_thread_proc(void *arg)
           * See http://support.microsoft.com:80/support/kb/articles/Q97/9/25.asp
           * for details.
           */
-
+         
 #define SPI_GETFOREGROUNDLOCKTIMEOUT 0x2000
 #define SPI_SETFOREGROUNDLOCKTIMEOUT 0x2001
          SystemParametersInfo(SPI_GETFOREGROUNDLOCKTIMEOUT,
                0, (LPVOID)&lock_time, 0);
          SystemParametersInfo(SPI_SETFOREGROUNDLOCKTIMEOUT,
                0, (LPVOID)0, SPIF_SENDWININICHANGE | SPIF_UPDATEINIFILE);
-
+      
          ShowWindow(wnd, SW_SHOWNORMAL);
          SetForegroundWindow(wnd);
          /* In some rare cases, it doesn't seem to work without the loop. And we
